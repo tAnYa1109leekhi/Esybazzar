@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
 import logo from "../assets/images/logo/loogo.png"
 import InfoIcon from '@mui/icons-material/Info';
+
+
+
 
 
 
@@ -11,6 +14,8 @@ const Navitems = () => {
 const [menutoggle , setMenutoggle] = useState(false);
 const [socialtoggle , setSocialtoggle] = useState(false);
 const [headerfixed , setHeaderfixed] = useState(false);
+
+
 
 window.addEventListener("scroll" , () => {
    if(window.scrollY>2000){
@@ -57,7 +62,7 @@ window.addEventListener("scroll" , () => {
         </ul>
 </div>
 </div>
-        <Link to="/signup" className='lab-btn  me-3 d-none d-md-block'>Create account</Link>
+        <Link to="/sign-up" className='lab-btn  me-3 d-none d-md-block'>Create account</Link>
         <Link to="/login" >Log in </Link>
 
     

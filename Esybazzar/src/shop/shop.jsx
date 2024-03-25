@@ -5,6 +5,8 @@ import Productcard from './productcard';
 import Slider from './slider';
 import Select from './right';
 import Shopcategory from './shopcategory';
+import Popularpost from './popularpost';
+import Tag from './tag';
 
 const showres = "showing 01-12 of 149 Results ";
 
@@ -83,6 +85,8 @@ const Shop = () => {
              selectedcategory={selectedcategory}
              
              />
+             <Popularpost />
+             <Tag />
             </div>
           </div>
         </div>

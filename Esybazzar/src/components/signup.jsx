@@ -1,0 +1,119 @@
+import React, { useState, useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Authcontext } from '../context/auth';
+
+const title = "Register";
+const socialtitle = "Login with social Media";
+const btntext = "Get Started Now";
+
+const Signup = () => {
+    const [errorMessage, setErrorMessage] = useState("");
+    const { signUpwithEmail,createUser } = useContext(Authcontext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
+
+    const handleSignup = (event)=>{
+        
+         event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        const confirmPassword = form.confirmPassword.value;
+        if(password!== confirmPassword){
+            setErrorMessage("Password dosn't Match!")
+        }else{
+            setErrorMessage("");
+            createUser(email,password).then((usercredential)=>{
+                const user = usercredential.user;
+                alert("Account created , Succesfully");
+                navigate(from,{replace: true})
+
+            }).catch((error)=>{
+                console.log(error.message);
+                alert(`${error.message}`)
+            })
+        }
+    }
+
+    const handleRegister = () => {
+        signUpwithEmail().then((result)=>{
+            const user = result.user;
+            navigate(from,{replace: true})
+        }).catch((error)=>{
+            const errorMsg = error.message;
+            seterrormessage("Oops! Please provide valid email & Paasword ")
+        })
+    
+    };
+
+    return (
+        <div>
+            <div className="login-section padding-tb section-bg">
+                <div className="container">
+                    <div className="account-wrapper">
+                        <h3 className='title'>{title}</h3>
+                        <form className='account-form' onSubmit={handleSignup}>
+                            <div className="form-group">
+                                <input type="text" id='username' name="username" placeholder='Username' required />
+                            </div>
+                            <div className="form-group">
+                                <input type="email" id='email' name="email" placeholder='Email Address' required />
+                            </div>
+                            <div className="form-group">
+                                <input type="password" id='password' name="password" placeholder='Password' required />
+                            </div>
+                            <div className="form-group">
+                                <input type="password" id='confirmPassword' name="confirmPassword" placeholder='Confirm Password' required />
+                            </div>
+                            <div>
+                                {errorMessage && (
+                                    <div className='error-message text-danger mb-2'>
+                                        {errorMessage}
+                                    </div>
+                                )}
+                            </div>
+                            <div className='form-group'>
+                                <div className='d-flex justify-content-between flex-wrap pt-sm-2'></div>
+                            </div>
+                            <div className='form-group' >
+                                <button type='submit' className='d-block lab-btn'>
+                                    <span>{btntext}</span>
+                                </button>
+                            </div>
+                        </form>
+                        <div className="account-bottom">
+                            <span className='d-block cate pt-10'>
+                                Have an Account? <Link to='/login'>Login</Link>
+                            </span>
+                            <span className='or'>
+                                <span>or</span>
+                            </span>
+                            <h5 className='subtitle'>{socialtitle}</h5>
+                            <ul className='lab-ul social-icons justify-content-center'>
+                                <li>
+                                    <button className='github' type="button" onClick={handleRegister}><i className='icofont-github'></i></button>
+                                </li>
+                                <li>
+                        <a href="/" className='twitter'> <i className='icofont-twitter'></i></a>
+                    </li>
+                    <li>
+                         <a href="/"className='instagram'><i className='icofont-instagram'></i></a>
+                    </li>
+                    <li>
+                        <a href="/"className='pinterest'><i className='icofont-pinterest'></i></a>
+                    </li>
+                    <li>
+                           <a href="/"className='linkedin'><i className='icofont-linkedin'></i></a>
+                    </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Signup;
+
