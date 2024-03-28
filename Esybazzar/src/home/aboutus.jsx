@@ -6,6 +6,7 @@ const subTitle = "Why Choose Us";
 const title = "Become a Marchant";
 const desc = "Take courses on your any device with our app & learn all about business what you want. Just download & install & start to learn";
 const btnText = "Apply Now";
+import imagesrc from "images/instructor/01.png"
 
 const countList = [
 {
@@ -64,7 +65,8 @@ const Aboutus = () => {
     
                 <div className="col ">
                   <div className="instructor-thumb">
-                  <img className="rounded-image" src="/assets/images/instructor/01.png" alt="image" />
+                  <img className="rounded-image" src={imagesrc}alt="image" />
+
 
                   </div>
                 </div>
